@@ -1,0 +1,40 @@
+html {
+	font-size:62.5%;
+}
+
+img {
+	max-width:100%;
+	width:100%;
+}
+
+.container {
+	width:80%;
+	max-width:600px;
+	margin: 0 auto;
+}
+
+ul {
+	display: flex;
+	flex-wrap:wrap;
+	.imageItem, .animal {
+		flex-basis:25%;
+		border:0.5px solid white;
+		// so the border doesn't get affected by the img blurr
+		overflow: hidden;
+	}
+	.imageItem img, .animal img {
+		display: block;
+		height:100%;
+		transition: 0.3s all ease;
+		filter: blur(15px);
+		animation:13s blur ease-out forwards;
+		cursor: pointer;
+	}
+}
+
+@keyframes blur {
+	100% {
+		filter: blur(0);
+		filter: none;
+	}
+}
