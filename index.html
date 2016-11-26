@@ -5,9 +5,12 @@
 	<meta charset="UTF-8">
 	<title>Hidden Hounds</title>
 	<link rel="stylesheet" href="public/styles/style.css">
-	<link rel="icon" type="image/png" href=""> <!-- Favicon -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- viewport meta tag -->
-	<link href="https://fonts.googleapis.com/css?family=Abhaya+Libre:400,600,700|Source+Sans+Pro:400,600,700|BioRhyme:400,800|Ultra:400" rel="stylesheet"><!-- googleFonts -->
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href=""> 
+	<!-- viewport meta tag -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<!-- googleFonts -->
+	<link href="https://fonts.googleapis.com/css?family=Allerta+Stencil|Chivo" rel="stylesheet">
 
 	<!-- SEO Starts -->
 	<meta name="keywords" content="funny game pet food cuisine hounds">
@@ -22,30 +25,47 @@
 <body>
 	<div class="preloader"></div>
 	<header>
-		<div class="container">
-			<h1>Hidden Hounds</h1>
-			<h3>Find that hound, hidden amongst the food.</h3>
-		</div> <!-- /wrapper -->
+		<h1>Hidden Hounds</h1>
+		<h2>Find that hound, hidden amongst the food.</h2>
 	</header>
 	
 	<main>
-		<div class="timer">
+		<div class="topInfo container">
+			<div class="levelContainer">
+				<p>Level: <span class="level">1</span></p>
+			</div>
+			<!-- /.level -->
+			<div class="timer">
+				<p>Timer: <span class="secondsLeft">0</span> </p>
+			</div>
+			<!-- /.timer -->
+		</div>
+		<!-- /.topInf -->
+
+		<div class="container mainImageContainer">
+			<ul>
+			<div class="modalBackground">
+				<button class="begin">Begin</button>
+				<button class="next">Next</button>
+				<button class="restart">Restart</button>
+			</div>
+			<!-- /.modal -->
+			</ul>
 
 		</div>
-		<!-- /.timer -->
-		<div class="container">
-			<ul>
-			</ul>
-		</div>
-		<!-- /.imageContainer -->
-		<div class="points">
+		<!-- /.container -->
+
+		<div class="pointsContainer">
+			<p> You have <span class="pointsValue"> 0 </span> points.</p>
 			
 		</div>
 		<!-- /.points -->
+
 		<div class="share">
 			
 		</div>
 		<!-- /.share -->
+
 	</main>
 
 	<footer>
@@ -63,6 +83,9 @@
 
 <!-- Flickity-->
 <script src="https://unpkg.com/flickity@2.0/dist/flickity.pkgd.min.js"></script>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
 
 <script src="public/scripts/main.js"></script>
 

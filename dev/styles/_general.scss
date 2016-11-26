@@ -2,39 +2,154 @@ html {
 	font-size:62.5%;
 }
 
+body {
+	background: url(../../images/background.png);
+	background-attachment: center;
+}
+
 img {
 	max-width:100%;
 	width:100%;
 }
 
+p, h1, h2{
+	text-align: center;
+	margin:0;
+	padding:0;
+}
+
+h1, h2 {
+	font-family: 'Allerta Stencil', sans-serif;
+}
+
+h1 {
+	margin-top:3rem;
+	font-size:9rem;
+	text-shadow: 2px 2px 10px white;
+}
+
+p {
+	font-family: 'Chivo', sans-serif;
+	font-size:2rem;
+}
+
+button {
+	font-size:3rem;
+	background-color:rgba(255,255,255,1);
+	padding:2rem;
+	border:3px solid black;
+	transition:0.3s all ease;
+	border-radius:20px;
+	&:hover, &:focus {
+		transform:scale(1.2);
+	}
+}
+
+// buttons to be hidden right away on load
+.begin {
+	font-size:5rem;
+}
+
+.next, .restart, .begin {
+	display: none;
+}
+
 .container {
 	width:80%;
-	max-width:600px;
+	max-width:500px;
 	margin: 0 auto;
 }
+
+.timer {
+	text-align:center;
+}
+
 
 ul {
 	display: flex;
 	flex-wrap:wrap;
-	.imageItem, .animal {
+	position: relative;
+	.imageItem, .animal, .starterLi {
 		flex-basis:25%;
 		border:0.5px solid white;
+		position: relative;
 		// so the border doesn't get affected by the img blurr
 		overflow: hidden;
+		&:hover img{
+			transform:scale(1.2);
+		}
+		&:hover {
+			cursor:pointer;
+		}
 	}
-	.imageItem img, .animal img {
+	.imageItem img, .animal img, {
 		display: block;
 		height:100%;
-		transition: 0.3s all ease;
+		transition: 0.5s all ease;
 		filter: blur(15px);
-		animation:13s blur ease-out forwards;
-		cursor: pointer;
+		animation:15s blur ease-out forwards;
+		// Not draggable
+		pointer-events: none; 
+		user-select: none;
+	}
+	.feedback {
+		position: absolute;
+		top:50%;
+		left:50%;
+		transform:translate(-50%, -50%);
+		opacity: 0;
+	}
+	.correct , .incorrect{
+		color:black;
+		background: white;
 	}
 }
 
+.mainImageContainer {
+	position: relative;
+	.modalBackground {
+		margin:0 auto;
+		position: absolute;
+		z-index:10;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		background-color: transparent;
+		display: flex;
+		justify-content:center;
+		align-items:center;
+		background-color: rgba(0,0,0,0.5);
+	}
+}
+
+.fastAnimation {
+	animation:3s blur ease-out forwards !important;
+}
+
+.fadeInAnimation {
+	animation: 1s cssFadeIn ease forwards;
+}
+
+.topInfo {
+	display:flex;
+	justify-content:space-between;
+}
+
+footer {
+	p {
+		font-size:1rem;
+	}
+}
 @keyframes blur {
 	100% {
 		filter: blur(0);
 		filter: none;
+	}
+}
+
+@keyframes cssFadeIn {
+	100% {
+		opacity:1;
 	}
 }
