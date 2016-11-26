@@ -24,11 +24,28 @@ hounds.makeUniqueRandom = function () {
 
 // Images for the begin screen
 hounds.imagePlaceHolders = function () {
-	for (var i = 0; i < 16; i++) {
-		$(".container ul").append("<li class='imageItem starterLi'><img src='../../images/backgroundsmsq.jpg' alt='A blank image of a gradient'></li>");
-	};
-	$('.begin').show();
-	$('.modalBackground').fadeIn();
+	// Make a call to the unsplash api to get 16 random images
+	$.ajax({
+		url: 'https://api.unsplash.com/photos/random/?client_id=96d765e7378978f9e9c06ee63116a6edb729ac3e912fe048dd7567d859339850',
+		dataType: 'json',
+		method: 'GET',
+		data: {
+			query: 'dog',
+			w: 150,
+			h: 150,
+			count: 16
+		}
+		// then loop through the array and put the urls in the list items
+	}).then(function (res) {
+		var onlyTheUrls = res.map(function (res) {
+			return res.urls.custom;
+		});
+		onlyTheUrls.forEach(function (value) {
+			$(".container ul").append("<li class='imageItem starterLi'><img src=" + value + " alt='A random dog image'></li>");
+		});
+		$('.begin').show();
+		$('.modalBackground').fadeIn();
+	});
 };
 
 // Randomize the images that appear on screen
@@ -126,21 +143,17 @@ hounds.init = function () {
 		level = level + 1;
 		$(".levelContainer .level").text(level);
 	});
-
-	// preloader code
-	$(window, ".results").load(function () {
-		$('.preloader').fadeOut('slow');
-	});
-
-	var $loading = $('.preloader').hide();
-	$(document).ajaxStart(function () {
-		$loading.show();
-	}).ajaxStop(function () {
-		$loading.hide();
-	});
 };
 
 $(function () {
+
+	// preloader code
+	$(window).load(function () {
+		setTimeout(function () {
+			$('.preloader').fadeOut('slow', function () {});
+		}, 3000);
+	});
+
 	hounds.init();
 
 	// SmoothScroll on anchor tags
