@@ -322,8 +322,9 @@ ul {
         justify-content: center;
     -ms-flex-align: center;
         align-items: center; }
-  ul .correct, ul .incorrect {
-    background-color: white; }
+  ul h2 {
+    background-color: white;
+    padding: 50px 30px; }
 
 .mainImageContainer {
   position: relative; }

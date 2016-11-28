@@ -6,8 +6,29 @@
 
 var hounds = {};
 
-// Empty array for random numbers to be pushed into
-hounds.uniqueRandoms = [];
+hounds.game = {
+	level: 1,
+	score: 0,
+	levelPhotos: [{
+		food: 'icecream',
+		animal: 'kitten'
+	}, {
+		food: 'chickenwings',
+		animal: 'doodle'
+	}, {
+		food: 'icecream',
+		animal: 'kitten'
+	}, {
+		food: 'chickenwings',
+		animal: 'doodle'
+	}, {
+		food: 'icecream',
+		animal: 'kitten'
+	}, {
+		food: 'chickenwings',
+		animal: 'doodle'
+	}]
+};
 
 // Make a unique random number that doesn't repeat between 1 and 16
 hounds.makeUniqueRandom = function () {
@@ -50,6 +71,7 @@ hounds.imagePlaceHolders = function () {
 
 // Randomize the images that appear on screen
 hounds.randomizeImages = function (food, animal) {
+	hounds.uniqueRandoms = [];
 	$('.imageItem, .animal').remove();
 	for (var i = 0; i < 16; i++) {
 		var randomNumber = hounds.makeUniqueRandom();
@@ -94,26 +116,25 @@ hounds.events = function (score, level) {
 		var newPoints = 100 - 2 * seconds;
 		$(this).children('.feedback').append("<h2 class='correct'> Correct, " + newPoints + " points. </h2>");
 		if (counter < 1) {
-			score.score = score.score + newPoints;
+			hounds.game.score = hounds.game.score + newPoints;
 		}
-		$(".pointsContainer .pointsValue").text(score.score);
+		$(".pointsContainer .pointsValue").text(hounds.game.score);
 		counter = counter + 1;
+		$('.modalBackground').fadeIn();
 		setTimeout(function () {
-			$('.begin').hide();
 			$('.next').show();
-			$('.modalBackground').fadeIn();
 		}, 1200);
 	});
 
 	$('.imageItem').on('click', function () {
 		$(".feedback .incorrect").remove();
-		$(this).children('.feedback').append("<h2 class='incorrect'> Incorrect! <br> -25 points </h2>");
+		$(this).children('.feedback').append("<h2 class='incorrect'> -25 points </h2>");
 		$(this).children('.feedback').addClass('jsFadeInAnimation');
-		score.score = score.score - 25;
-		if (score.score < 0) {
-			score.score = 0;
+		hounds.game.score = hounds.game.score - 25;
+		if (hounds.game.score < 0) {
+			hounds.game.score = 0;
 		}
-		$(".pointsContainer .pointsValue").text(score.score);
+		$(".pointsContainer .pointsValue").text(hounds.game.score);
 	});
 };
 
@@ -121,9 +142,6 @@ hounds.events = function (score, level) {
 
 
 hounds.init = function () {
-
-	var score = { score: 0 };
-	var level = { level: 1 };
 
 	// on start load the images on the screen
 	hounds.imagePlaceHolders();
@@ -133,15 +151,16 @@ hounds.init = function () {
 		hounds.randomizeImages('muffin', 'cha');
 		// hide the modalbackrgound but also change it's color for later on in the game
 		$('.modalBackground').hide().css('background', 'rgba(0,0,0,0.6)');
-		hounds.events(score, level);
+		hounds.events(hounds.game.score, hounds.game.level);
+		$('.begin').hide();
 	});
 
 	$('.next').on('click', function () {
 		$('.modalBackground').hide();
 		hounds.randomizeImages('icecream', 'kitten');
-		hounds.events(score, level);
-		level = level.level + 1;
-		$(".levelContainer .level").text(level);
+		hounds.events(hounds.game.score, hounds.game.level);
+		hounds.game.level = hounds.game.level + 1;
+		$(".levelContainer .level").text(hounds.game.level);
 	});
 };
 
@@ -171,5 +190,6 @@ $(function () {
 		storageBucket: "hidden-hounds.appspot.com",
 		messagingSenderId: "292106244054"
 	};
+
 	firebase.initializeApp(config);
 });
