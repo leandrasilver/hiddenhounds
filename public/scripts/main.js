@@ -30,7 +30,7 @@ hounds.imagePlaceHolders = function () {
 		dataType: 'json',
 		method: 'GET',
 		data: {
-			query: 'dog',
+			collections: 728,
 			w: 150,
 			h: 150,
 			count: 16
@@ -58,7 +58,7 @@ hounds.randomizeImages = function (food, animal) {
 	var randomNumber = hounds.makeUniqueRandom();
 	$('.imageItem' + randomNumber).replaceWith("<li class='animal'><img src='../../images/" + food + "/" + animal + ".jpg' alt='A puppy that resembles a yummy chocolate chip muffin'><div class='feedback'></div></li>");
 	// make sure to remove the added class of a fast animation as nothing was clicked yet by the user.
-	$('.imageItem img, .animal img').removeClass('fastAnimation');
+	$('.imageItem img, .animal img').removeClass('jsFastAnimation');
 };
 
 // Events on click of list items
@@ -67,10 +67,8 @@ hounds.events = function (score, level) {
 	hounds.countdown = window.setInterval(function () {
 		// Update the span text with the number of seconds
 		$('.secondsLeft').text(seconds);
-
 		// Increase the number of seconds by 1 
 		seconds = seconds + 1; // or seconds;
-
 		// Stop the timer if it lasts over 50 seconds
 		if (seconds >= 50) {
 			$('.timer').text("Timed Out, Try again!");
@@ -86,34 +84,36 @@ hounds.events = function (score, level) {
 		}
 	}, 1000);
 
+	// Need a counter so that the user doesn't press the animal multiple times
 	var counter = 0;
-
-	$('.animal').mouseup(function () {
+	$('.animal').on('click', function () {
 		window.clearInterval(hounds.countdown);
-		$(".feedback .correct, .feedback .incorrect").remove();
-		$(this).children('.feedback').append("<h2 class='correct'> Correct, that only took " + (seconds - 1) + "s.</h2>");
-		$('.imageItem img, .animal img').addClass('fastAnimation');
+		$(".feedback .incorrect").remove();
+		$(this).children('.feedback').addClass('jsFadeInAnimation');
+		$('.imageItem img, .animal img').addClass('jsFastAnimation');
+		var newPoints = 100 - 2 * seconds;
+		$(this).children('.feedback').append("<h2 class='correct'> Correct, " + newPoints + " points. </h2>");
 		if (counter < 1) {
-			score = score + (100 - 2 * seconds);
+			score.score = score.score + newPoints;
 		}
-		$(".pointsContainer .pointsValue").text(score);
+		$(".pointsContainer .pointsValue").text(score.score);
 		counter = counter + 1;
 		setTimeout(function () {
 			$('.begin').hide();
 			$('.next').show();
 			$('.modalBackground').fadeIn();
-		}, 500);
+		}, 1200);
 	});
 
 	$('.imageItem').on('click', function () {
 		$(".feedback .incorrect").remove();
-		$(this).children('.feedback').append("<h2 class='incorrect'> Incorrect! -25 points </h2>");
-		$(this).children('.feedback').addClass('fadeInAnimation');
-		score = score - 25;
-		if (score < 0) {
-			score = 0;
+		$(this).children('.feedback').append("<h2 class='incorrect'> Incorrect! <br> -25 points </h2>");
+		$(this).children('.feedback').addClass('jsFadeInAnimation');
+		score.score = score.score - 25;
+		if (score.score < 0) {
+			score.score = 0;
 		}
-		$(".pointsContainer .pointsValue").text(score);
+		$(".pointsContainer .pointsValue").text(score.score);
 	});
 };
 
@@ -122,8 +122,8 @@ hounds.events = function (score, level) {
 
 hounds.init = function () {
 
-	var score = 0;
-	var level = 1;
+	var score = { score: 0 };
+	var level = { level: 1 };
 
 	// on start load the images on the screen
 	hounds.imagePlaceHolders();
@@ -140,7 +140,7 @@ hounds.init = function () {
 		$('.modalBackground').hide();
 		hounds.randomizeImages('icecream', 'kitten');
 		hounds.events(score, level);
-		level = level + 1;
+		level = level.level + 1;
 		$(".levelContainer .level").text(level);
 	});
 };
@@ -151,7 +151,11 @@ $(function () {
 	$(window).load(function () {
 		setTimeout(function () {
 			$('.preloader').fadeOut('slow', function () {});
-		}, 3000);
+		}, 700);
+	});
+
+	$('.instructionsButton').on('click', function () {
+		$('.instructions').toggleClass('jsShow');
 	});
 
 	hounds.init();
