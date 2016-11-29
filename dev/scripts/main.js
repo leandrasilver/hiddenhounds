@@ -68,7 +68,7 @@ hounds.imagePlaceHolders = function(){
 			return res.urls.custom;
 		});
 		onlyTheUrls.forEach(function(value){
-			$(".container ul").append("<li class='imageItem starterLi'><img src="+value+" alt='A random dog image'></li>");
+			$(".container ul").append("<li class='imageItem starterLi'><img src="+value+" alt='A random dog image for the game'></li>");
 		});
 		$('.begin').show();
 		$('.modalBackground').fadeIn();
@@ -81,10 +81,11 @@ hounds.randomizeImages = function (food, animal) {
 	$('.imageItem, .animal').remove();
 	for ( var i = 0; i < 16; i++) {
 		var randomNumber= hounds.makeUniqueRandom();
-		$(".container ul").append("<li class='imageItem imageItem"+randomNumber+"'><img src='../../images/"+food+"/"+food+""+randomNumber+".jpg' alt='A tasty chocolate chip muffin that looks slightly like a dog'><div class='feedback'></div></li>");
+		$(".container ul").append("<li class='imageItem imageItem"+randomNumber+"'><img src='images/"+food+"/"+food+""+randomNumber+".jpg' alt='A tasty chocolate chip muffin that looks slightly like a dog'><div class='feedback'></div></li>");
 	};
 	var randomNumber= hounds.makeUniqueRandom();
-	$('.imageItem'+randomNumber).replaceWith("<li class='animal'><img src='../../images/"+food+"/"+animal+".jpg' alt='A puppy that resembles a yummy chocolate chip muffin'><div class='feedback'></div></li>");
+	var animalNum= Math.floor(Math.random() * 3) + 1  ;
+	$('.imageItem'+randomNumber).replaceWith("<li class='animal'><img src='images/"+food+"/"+animal+""+animalNum+".jpg' alt='A puppy that resembles a yummy chocolate chip muffin'><div class='feedback'></div></li>");
 	// make sure to remove the added class of a fast animation as nothing was clicked yet by the user.
 	$('.imageItem img, .animal img').removeClass('jsFastAnimation');
 };
@@ -104,34 +105,50 @@ hounds.events = function (score, level){
 			setTimeout(function(){ 
 				$('.begin, .next').hide();
 				$('.restart').show();
+				$('.share').addClass('jsFlexShow');
+				var tweet = (`https://twitter.com/intent/tweet?text=I got ${hounds.game.score} points! Try Hidden hounds yourself at www.leandrasilver.com/hiddenHounds %23hiddenhounds`);
+				document.getElementById("twitter-button").setAttribute("href", tweet);
 				$('.modalBackground').fadeIn();
-				$('.restart').on('click', function(){
-					location.reload();
-				});
 			}, 500);
 		}
 	},1000);
 
 	// Need a counter so that the user doesn't press the animal multiple times
 	var counter = 0;
+
+	// On click of the animal image
+	// stop and clear the timer
+	// calculate and display the points
+	// on click of the last animal image prompt twitter share and restart button
 	$('.animal').on('click', function(){
 		window.clearInterval(hounds.countdown);
 		$(".feedback .incorrect").remove();
-		$(this).children('.feedback').addClass('jsFadeInAnimation');
-		$('.imageItem img, .animal img').addClass('jsFastAnimation');
 		var newPoints = (100 - (2*seconds));
-		$(this).children('.feedback').append("<h2 class='correct'> Correct, "+newPoints+" points. </h2>");
 		if (counter<1) {	
 			hounds.game.score = hounds.game.score + newPoints;
 		}
+		$(this).children('.feedback').addClass('jsFadeInAnimation');
+		$('.imageItem img, .animal img').addClass('jsFastAnimation');
+		$(this).children('.feedback').append("<h2 class='correct'> Correct, "+newPoints+" points. </h2>");
 		$(".pointsContainer .pointsValue").text(hounds.game.score);
 		counter = counter+1;
 		$('.modalBackground').fadeIn();
 		setTimeout(function(){ 
-			$('.next').show();
+			if (hounds.game.level <= 6) {
+				$('.next').show();
+			} else {
+				$('.next, .begin').hide();
+				$('.restart').show();
+				$('.share').addClass('jsFlexShow');
+				$('.points').text(hounds.game.score);
+				var tweet = (`https://twitter.com/intent/tweet?text=I got ${hounds.game.score} points! Try Hidden hounds yourself at  www.leandrasilver.com/hiddenHounds %23hiddenhounds`);
+				document.getElementById("twitter-button").setAttribute("href", tweet);
+			}	
 		}, 1200);
 	});
 
+	// On click of anything other then an animal image 
+	// calculate and display the points 
 	$('.imageItem').on('click',  function(){
 		$(".feedback .incorrect").remove();
 		$(this).children('.feedback').append("<h2 class='incorrect'> -25 points </h2>");
@@ -161,6 +178,8 @@ hounds.init = function () {
 		$('.begin').hide();	
 	});
 
+	// On click of the next button increase level
+	// run the random image function as well as the events function
 	$('.next').on('click', function(){
 		$('.modalBackground').hide();
 		hounds.randomizeImages('icecream','kitten');
@@ -168,6 +187,11 @@ hounds.init = function () {
 		hounds.game.level=hounds.game.level+1;
 		$(".levelContainer .level").text(hounds.game.level);
 	});
+
+	$('.restart').on('click', function(){
+		location.reload();
+	});
+    
 };
 
 $(function () {

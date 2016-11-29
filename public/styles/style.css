@@ -161,28 +161,38 @@ h1, h2, h3 {
   font-family: 'Allerta Stencil', sans-serif; }
 
 h1 {
-  margin-top: 3rem;
+  margin-top: 2.5rem;
   font-size: 9rem;
   text-shadow: 2px 2px 10px white;
   transition: 0.3s ease all;
-  margin-bottom: 30px; }
-
-h3 {
-  text-align: center; }
+  margin-bottom: 20px; }
 
 p {
   font-family: 'Chivo', sans-serif;
-  font-size: 2rem; }
+  font-size: 1.5rem;
+  margin-top: 5px;
+  line-height: 2rem; }
 
 button {
-  font-size: 3rem;
+  font-size: 2rem;
   background-color: white;
   padding: 1rem;
-  border: 3px solid black;
   transition: 0.3s all ease;
-  border-radius: 20px; }
+  border-radius: 10px;
+  display: block;
+  border: none; }
   button:hover, button:focus {
     transform: scale(1.1); }
+
+#twitter-button, .modalBackground h2 {
+  background: url(../../images/background.png);
+  background-position: center;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 10px;
+  color: black; }
 
 .preloader {
   position: fixed;
@@ -207,11 +217,20 @@ button {
     position: relative;
     top: -100px; }
 
-.begin {
-  font-size: 3rem; }
+.share {
+  width: 50%;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: justify;
+      justify-content: space-between; }
+  .share button {
+    margin-top: 10px; }
 
-.next, .restart {
+.next, .restart, .share {
   display: none; }
+
+.restart {
+  margin: 0 auto; }
 
 .container {
   width: 80%;
@@ -241,11 +260,22 @@ header span {
     animation: 0.5s cssFadeIn ease forwards;
     transition: 0.5s ease all; }
 
-.topInfo {
+.topInfo, .pointsContainer {
   border: 2px solid black;
-  border-bottom: none;
   background-color: rgba(255, 255, 255, 0.5);
-  padding: 3px 10px; }
+  padding: 3px 10px;
+  display: -ms-flexbox;
+  display: flex; }
+
+.topInfo {
+  border-bottom: none;
+  -ms-flex-pack: justify;
+      justify-content: space-between; }
+
+.pointsContainer {
+  border-top: none;
+  -ms-flex-pack: center;
+      justify-content: center; }
 
 .instructionsButton {
   position: fixed;
@@ -345,14 +375,10 @@ ul {
         align-items: center;
     background-color: rgba(0, 0, 0, 0.5); }
 
-.topInfo {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: justify;
-      justify-content: space-between; }
-
-footer p {
-  font-size: 1rem; }
+footer {
+  margin-top: 10px; }
+  footer p {
+    font-size: 1rem; }
 
 .jsFastAnimation {
   animation: 3s blur ease-out forwards !important; }
@@ -363,6 +389,10 @@ footer p {
 .jsShow {
   display: block;
   animation: 0.3s cssFadeIn ease forwards; }
+
+.jsFlexShow {
+  display: -ms-flexbox;
+  display: flex; }
 
 @keyframes blur {
   100% {
@@ -388,4 +418,6 @@ footer p {
 @media screen and (max-width: 400px) {
   .instructions {
     top: 20px;
-    left: 20px; } }
+    left: 20px; }
+  .correct, .incorrect {
+    font-size: 1rem; } }

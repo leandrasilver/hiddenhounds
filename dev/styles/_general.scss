@@ -25,36 +25,45 @@ h1, h2, h3 {
 }
 
 h1 {
-	margin-top:3rem;
+	margin-top:2.5rem;
 	font-size:9rem;
 	text-shadow: 2px 2px 10px white;
 	transition:0.3s ease all;
-	margin-bottom:30px;
-}
-
-h3 {
-	text-align:center;
+	margin-bottom:20px;
 }
 
 p {
 	font-family: 'Chivo', sans-serif;
-	font-size:2rem;
+	font-size:1.5rem;
+	margin-top: 5px;
+	line-height: 2rem;
 }
 
 button {
-	font-size:3rem;
+	font-size:2rem;
 	background-color:rgba(255,255,255,1);
 	padding:1rem;
-	border:3px solid black;
 	transition:0.3s all ease;
-	border-radius:20px;
+	border-radius:10px;
+	display: block;
+	border:none;
 	&:hover, &:focus {
 		transform:scale(1.1);
 	}
 }
 
-// preloader
+#twitter-button, .modalBackground h2  {
+	background:url(../../images/background.png);
+	background-position: center;
+	text-decoration: none;
+	padding:10px;
+	border-radius:10px;
+	margin:0 auto;
+	margin-top:10px;
+	color: black;
+};
 
+// preloader
 .preloader {
    position: fixed;
    top: 0;
@@ -77,13 +86,22 @@ button {
    }
 }
 
-.begin {
-	font-size:3rem;
+.share {
+	width:50%;
+	flex-direction:column;
+	justify-content:space-between;
+	button {
+		margin-top:10px;
+	}
 }
 
 // buttons to be hidden right away on load
-.next, .restart {
+.next, .restart, .share {
 	display: none;
+}
+
+.restart {
+	margin: 0 auto;
 }
 
 .container {
@@ -119,11 +137,21 @@ header span {
 	}
 }
 
-.topInfo {
+.topInfo, .pointsContainer {
 	border:2px solid black;
-	border-bottom:none;
 	background-color: rgba(255,255,255,0.5);
 	padding:3px 10px;
+	display:flex;
+}
+
+.topInfo {
+	border-bottom:none;
+	justify-content:space-between;
+}
+
+.pointsContainer {
+	border-top:none;
+	justify-content:center;
 }
 
 .instructionsButton {
@@ -229,12 +257,8 @@ ul {
 	}
 }
 
-.topInfo {
-	display:flex;
-	justify-content:space-between;
-}
-
 footer {
+	margin-top:10px;
 	p {
 		font-size:1rem;
 	}
@@ -253,6 +277,10 @@ footer {
 .jsShow {
 	display: block;
 	animation: 0.3s cssFadeIn ease forwards;
+}
+
+.jsFlexShow {
+	display: flex;
 }
 
 // Animations
@@ -291,5 +319,8 @@ footer {
 	.instructions {
 		top:20px;
 		left:20px;
+	}
+	.correct, .incorrect {
+		font-size: 1rem;
 	}
 }

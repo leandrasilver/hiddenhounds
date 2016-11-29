@@ -14,8 +14,13 @@
 
 	<!-- SEO Starts -->
 	<meta name="keywords" content="funny game pet food cuisine hounds">
-	<meta name="description" content="Hounds">
+	<meta name="description" content="Hidden Hounds">
 	<meta name="author" content="Leandra Silver">
+	<meta property="og:image" content="images/muffin/cha1.jpg"/>
+	<meta property="og:title" content="Hidden Hounds"/>
+	<meta property="og:url" content="https://leandrasilver.com/hiddenHounds"/>
+	<meta property="og:site_name" content="Hidden Hounds"/>
+	<meta property="og:type" content="game"/>
  	<!-- /SEO ends -->
 
 	<!-- FontAwesome -->
@@ -36,48 +41,51 @@
 			<i class="fa fa-question" aria-hidden="true"></i>
 			<div class="instructions">
 				<h2>Instructions</h2>
-				<h3> There will be 16 blurred images displayed. As the images become clear, find and click the dog. You receive more points the faster you select the dog. Careful you will loose 25 points for guessing wrong.</h3>
+				<p> There will be 16 blurred images displayed. As the images become clear, find and click the dog. You receive more points the faster you select the dog. Careful you will loose 25 points for guessing wrong. </p>
+				<p>Hint: For level 7 you are looking for a kitten!</p>
 			</div>
 		</div>
 		<!-- /.instructions -->
-		<div class="topInfo container">
-			<div class="levelContainer">
-				<p>Level: <span class="level">1</span>/7</p>
-			</div>
-			<!-- /.level -->
-			<div class="timer">
-				<p>Timer: <span class="secondsLeft">0</span> </p>
-			</div>
-			<!-- /.timer -->
-		</div>
-		<!-- /.topInf -->
 
-		<div class="container mainImageContainer">
-			<ul>
-				<div class="modalBackground">
-					<button class="begin">Begin</button>
-					<button class="next">Next</button>
-					<button class="restart">Restart</button>
+		<div class="container">
+			<div class="topInfo">
+				<div class="levelContainer">
+					<p>Level: <span class="level">1</span>/7</p>
 				</div>
-				<!-- /.modalBackground -->
-			</ul>
+				<!-- /.level -->
+				<div class="timer">
+					<p>Timer: <span class="secondsLeft">0</span> </p>
+				</div>
+				<!-- /.timer -->
+			</div>
+			<!-- /.topInf -->
+			<div class="mainImageContainer">
+				<ul>
+					<div class="modalBackground">
+						<button class="begin">Begin</button>
+						<button class="next">Next</button>
+						<div class="share">
+							<h2>You got <span class="points"></span> points, share!</h2>
+							<a href="#" id="twitter-button" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i> Tweet your result</a>
+							<button class="restart">Restart</button>
+						</div>
+						<!-- /.share -->
+					</div>
+					<!-- /.modalBackground -->
+				</ul>
+			</div>
+			<!-- /.mainImageContainer-->
+			<div class="pointsContainer">
+				<p> You have <span class="pointsValue"> 0 </span> points.</p>
+			</div>
+			<!-- /.points -->
 		</div>
 		<!-- /.container -->
-
-		<div class="pointsContainer">
-			<p> You have <span class="pointsValue"> 0 </span> points.</p>
-		</div>
-		<!-- /.points -->
-
-		<div class="share">
-		</div>
-		<!-- /.share -->
-
 	</main>
 
 	<footer>
 		<div class="container">
-			<p>Developed and designed by: Leandra Silver <a href="http://www.leandrasilver.com" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a> <a href="https://www.twitter.com/leandrasilver" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a> | Begin Photos by <a href="https://unsplash.com/developers">Unsplash</a> API | Original memes by Turkey | <span>&#169; 2016</span></p>
+			<p>Developed and designed by: Leandra Silver <a href="http://www.leandrasilver.com" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a> <a href="https://www.twitter.com/leandrasilver" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a> | Begin Photos by <a href="https://unsplash.com/developers">Unsplash</a> API | Original memes by <a href="https://twitter.com/teenybiscuit">@teenybiscuit</a> | <span>&#169; 2016</span></p>
 		</div>
 		<!-- /.container -->
 	</footer>
@@ -93,6 +101,9 @@
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+
+<!-- Tweet -->
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 <script src="public/scripts/main.js"></script>
 
