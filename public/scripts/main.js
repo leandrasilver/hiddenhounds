@@ -10,23 +10,17 @@ hounds.game = {
 	level: 1,
 	score: 0,
 	levelPhotos: [{
-		food: 'icecream',
-		animal: 'kitten'
+		food: 'cookies',
+		animal: 'dal'
 	}, {
-		food: 'chickenwings',
+		food: 'bagel',
+		animal: 'puppy'
+	}, {
+		food: 'chicken',
 		animal: 'doodle'
 	}, {
 		food: 'icecream',
 		animal: 'kitten'
-	}, {
-		food: 'chickenwings',
-		animal: 'doodle'
-	}, {
-		food: 'icecream',
-		animal: 'kitten'
-	}, {
-		food: 'chickenwings',
-		animal: 'doodle'
 	}]
 };
 
@@ -75,11 +69,11 @@ hounds.randomizeImages = function (food, animal) {
 	$('.imageItem, .animal').remove();
 	for (var i = 0; i < 16; i++) {
 		var randomNumber = hounds.makeUniqueRandom();
-		$(".container ul").append("<li class='imageItem imageItem" + randomNumber + "'><img src='images/" + food + "/" + food + "" + randomNumber + ".jpg' alt='A tasty chocolate chip muffin that looks slightly like a dog'><div class='feedback'></div></li>");
+		$(".container ul").append("<li class='imageItem imageItem" + randomNumber + "'><img src='images/" + food + "/" + food + "" + randomNumber + ".jpg' alt='A food item that resembles an animal'><div class='feedback'></div></li>");
 	};
 	var randomNumber = hounds.makeUniqueRandom();
 	var animalNum = Math.floor(Math.random() * 3) + 1;
-	$('.imageItem' + randomNumber).replaceWith("<li class='animal'><img src='images/" + food + "/" + animal + "" + animalNum + ".jpg' alt='A puppy that resembles a yummy chocolate chip muffin'><div class='feedback'></div></li>");
+	$('.imageItem' + randomNumber).replaceWith("<li class='animal'><img src='images/" + food + "/" + animal + "" + animalNum + ".jpg' alt='A animal'><div class='feedback'></div></li>");
 	// make sure to remove the added class of a fast animation as nothing was clicked yet by the user.
 	$('.imageItem img, .animal img').removeClass('jsFastAnimation');
 };
@@ -94,14 +88,12 @@ hounds.events = function (score, level) {
 		seconds = seconds + 1; // or seconds;
 		// Stop the timer if it lasts over 50 seconds
 		if (seconds >= 50) {
-			$('.timer').text("Timed Out, Try again!");
 			clearInterval(hounds.countdown);
+			$('.countUp').remove();
+			$('.timer').append('<p>Time is out!</p>');
 			setTimeout(function () {
-				$('.begin, .next').hide();
-				$('.restart').show();
-				$('.share').addClass('jsFlexShow');
-				var tweet = 'https://twitter.com/intent/tweet?text=I got ' + hounds.game.score + ' points! Try Hidden hounds yourself at www.leandrasilver.com/hiddenHounds %23hiddenhounds';
-				document.getElementById("twitter-button").setAttribute("href", tweet);
+				$('.begin, .next, .share h2, .share a').hide();
+				$('.restart, .share').show();
 				$('.modalBackground').fadeIn();
 			}, 500);
 		}
@@ -128,7 +120,7 @@ hounds.events = function (score, level) {
 		counter = counter + 1;
 		$('.modalBackground').fadeIn();
 		setTimeout(function () {
-			if (hounds.game.level <= 6) {
+			if (hounds.game.level <= 4) {
 				$('.next').show();
 			} else {
 				$('.next, .begin').hide();
@@ -174,12 +166,14 @@ hounds.init = function () {
 
 	// On click of the next button increase level
 	// run the random image function as well as the events function
+	var index = 0;
 	$('.next').on('click', function () {
 		$('.modalBackground').hide();
-		hounds.randomizeImages('icecream', 'kitten');
+		hounds.randomizeImages(hounds.game.levelPhotos[index].food, hounds.game.levelPhotos[index].animal);
 		hounds.events(hounds.game.score, hounds.game.level);
 		hounds.game.level = hounds.game.level + 1;
 		$(".levelContainer .level").text(hounds.game.level);
+		index = index + 1;
 	});
 
 	$('.restart').on('click', function () {
