@@ -1,6 +1,6 @@
 # Welcome to Hidden Hounds
 
-Check it out live [here](https://www.leandrasilver.com/hiddenHounds).
+Check it out live [here](http://www.leandrasilver.com/hiddenHounds).
 
 ## Description
 

@@ -7,6 +7,7 @@ html {
 body {
 	background: url(../../images/background.png);
 	background-attachment: center;
+	color: white;
 }
 
 img {
@@ -21,47 +22,54 @@ p, h1, h2{
 }
 
 h1, h2, h3 {
-	font-family: 'Allerta Stencil', sans-serif;
+	font-family: 'gooddog', sans-serif;
 }
 
 h1 {
 	margin-top:2.5rem;
-	font-size:9rem;
-	text-shadow: 2px 2px 10px white;
+	font-size:10rem;
 	transition:0.3s ease all;
 	margin-bottom:20px;
+	color: white;
+	letter-spacing: 0.4rem;
 }
 
 p {
-	font-family: 'Chivo', sans-serif;
-	font-size:1.5rem;
+	font-family: 'gooddog2', sans-serif;
+	font-size:2.3rem;
 	margin-top: 5px;
 	line-height: 2rem;
+	letter-spacing: 0.2rem;
 }
 
 button {
-	font-size:2rem;
-	background-color:rgba(255,255,255,1);
-	padding:1rem;
+	font-size:3rem;
+	background-color:$lightPurple;
+	padding:7px;
 	transition:0.3s all ease;
+	border:4px solid white;
+	color:white;
 	border-radius:10px;
 	display: block;
-	border:none;
+	font-family: 'gooddog', sans-serif;
 	&:hover, &:focus {
 		transform:scale(1.1);
 	}
 }
 
 #twitter-button, .modalBackground h2  {
-	background:url(../../images/background.png);
 	background-position: center;
+	font-family: sans-serif;
 	text-decoration: none;
 	padding:10px;
 	border-radius:10px;
 	margin:0 auto;
 	margin-top:10px;
-	color: black;
-};
+	color: white;
+	border:2px solid white;
+	background-color:$lightPurple;
+	text-align: center;
+}
 
 // preloader
 .preloader {
@@ -83,6 +91,7 @@ button {
    	text-transform:uppercase;
    	position: relative;
    	top:-100px;
+   	color:black;
    }
 }
 
@@ -90,9 +99,11 @@ button {
 	width:50%;
 	flex-direction:column;
 	justify-content:space-between;
+	font-family: 'gooddog2', sans-serif;
 	button {
 		margin-top:10px;
 	}
+	color:black;
 }
 
 // buttons to be hidden right away on load
@@ -122,11 +133,11 @@ header span {
 		text-shadow:none;
 	}
 	&:hover::before {
-		color: black;
+		color: white;
 		text-shadow: 2px 2px 10px white;
 		content:'\f1b0';
 		font-family: 'FontAwesome';
-		font-size: 5rem;
+		font-size: 3rem;
 		position: absolute;
 		top:58%;
 		left:50%;
@@ -137,9 +148,14 @@ header span {
 	}
 }
 
+main .container {
+	background-color:$lightPurple;
+	padding:1px 5px;
+	border: 10px solid white;
+	border-radius:20px;
+}
+
 .topInfo, .pointsContainer {
-	border:2px solid black;
-	background-color: rgba(255,255,255,0.5);
 	padding:3px 10px;
 	display:flex;
 }
@@ -160,7 +176,7 @@ header span {
 	right:22px;
 	z-index: 20;
 	.fa {
-		color: red;
+		color: $lightPurple;
 		font-size:2rem;
 		padding:6px 11px 6px 9px;
 		border-radius:50%;
@@ -174,7 +190,7 @@ header span {
 	padding:2rem;
 	position: fixed;
 	background-color: white;
-	border:2px solid black;
+	border:2px solid $lightPurple;
 	right:20px;
 	left:75%;
 	display: none;
@@ -183,12 +199,16 @@ header span {
 	z-index: -10;
 	opacity: 0;
 	h2 {
-		font-size:2rem;
+		font-size:3rem;
 		text-decoration: underline;
 		margin-bottom: 10px;
+		color: black;
+		letter-spacing:0.2rem;
 	}
-	h3 {
+	p {
 		font-size:1.4rem;
+		color: black;
+		font-family: sans-serif;
 	}
 }
 
@@ -198,7 +218,7 @@ ul {
 	position: relative;
 	.imageItem, .animal{
 		flex-basis:25%;
-		border:0.5px solid white;
+		border:0.5px solid $lightPurple;
 		position: relative;
 		// so the border doesn't get affected by the img blurr
 		overflow: hidden;
@@ -225,17 +245,17 @@ ul {
 	.feedback {
 		position: absolute;
 		top:0;
-		left:0;
-		right:0;
+		left:-1px;
+		right:-1px;
 		bottom:0;
 		opacity: 0;
 		display: flex;
 		justify-content:center;
 		align-items:center;
+		background-color: $lightPurple;
 	}
 	h2 {
-		background-color: white;
-		padding:50px 30px;
+		font-family:sans-serif;
 	}
 }
 
@@ -261,6 +281,10 @@ footer {
 	margin-top:10px;
 	p {
 		font-size:1rem;
+		color: black;
+		font-family: sans-serif;
+		line-height: 1.3rem;
+		padding:0;
 	}
 }
 
@@ -294,33 +318,5 @@ footer {
 @keyframes cssFadeIn {
 	100% {
 		opacity:1;
-	}
-}
-
-@media screen and (max-width:1000px) {
-	.instructions {
-		top:20px;
-		left:20px;
-	}
-}
-
-@media screen and (max-width:720px) {
-	.instructions {
-		top:20px;
-		left:20px;
-	}
-
-	h1 {
-		font-size:6.5rem;
-	}
-}
-
-@media screen and (max-width:400px) {
-	.instructions {
-		top:20px;
-		left:20px;
-	}
-	.correct, .incorrect {
-		font-size: 1rem;
 	}
 }

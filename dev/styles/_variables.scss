@@ -1,7 +1,16 @@
 // Color Palette
 
-$midnightBlue:rgb(28,0,64);
+$lightPurple:lighten(#B19CD9,5%);
 
 // fonts 
 $headerFont: 'BioRhyme', serif;
 
+@font-face {
+  font-family: 'gooddog';
+  src: url("../../good_dog/GOODDC__.TTF");
+}
+
+@font-face {
+  font-family: 'gooddog2';
+  src: url("../../good_dog/GOODDP__.TTF");
+}

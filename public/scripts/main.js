@@ -125,7 +125,9 @@
 		// on click of the last animal image prompt twitter share and restart button
 		$('.animal').on('click', function () {
 			window.clearInterval(game.countdown);
+			$(".feedback").hide();
 			$(".feedback .incorrect").remove();
+			$(this).children('.feedback').show();
 			var newPoints = 100 - 2 * seconds;
 			if (counter < 1) {
 				game.stats.score = game.stats.score + newPoints;
@@ -144,7 +146,7 @@
 					$('.restart').show();
 					$('.share').addClass('jsFlexShow');
 					$('.points').text(game.stats.score);
-					var tweet = 'https://twitter.com/intent/tweet?text=I got ' + game.stats.score + ' points! Try Hidden game yourself at  www.leandrasilver.com/hiddengame %23hiddengame';
+					var tweet = 'https://twitter.com/intent/tweet?text=I got ' + game.stats.score + ' points! Try Hidden Hounds yourself at  www.leandrasilver.com/hiddengame %23hiddengame';
 					document.getElementById("twitter-button").setAttribute("href", tweet);
 				}
 			}, 1200);
@@ -153,8 +155,11 @@
 		// On click of anything other then an animal image 
 		// calculate and display the points 
 		$('.imageItem').on('click', function () {
+			// Hide and remove previous feedback + incorrect statement
+			$(".feedback").hide();
 			$(".feedback .incorrect").remove();
 			$(this).children('.feedback').append("<h2 class='incorrect'> -25 points </h2>");
+			$(this).children('.feedback').show();
 			$(this).children('.feedback').addClass('jsFadeInAnimation');
 			var diminishPointsValue = 25;
 			game.stats.score = game.stats.score - diminishPointsValue;
