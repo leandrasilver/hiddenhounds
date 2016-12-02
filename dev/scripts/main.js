@@ -131,7 +131,6 @@
 		$('.animal').on('click', function(){
 			window.clearInterval(game.countdown);
 			$(".feedback").hide();
-			$(".feedback .incorrect").remove();
 			$(this).children('.feedback').show();
 			var newPoints = (100 - (2*seconds));
 			if (counter<1) {	
@@ -147,11 +146,11 @@
 				if (game.stats.level <= 4) {
 					$('.next').show();
 				} else {
+					$('.points').text(game.stats.score);
 					$('.next, .begin').hide();
 					$('.restart').show();
 					$('.share').addClass('jsFlexShow');
-					$('.points').text(game.stats.score);
-					var tweet = (`https://twitter.com/intent/tweet?text=I got ${game.stats.score} points! Try Hidden Hounds yourself at  www.leandrasilver.com/hiddengame %23hiddengame`);
+					var tweet = (`https://twitter.com/intent/tweet?text=I got ${game.stats.score} points! Try Hidden Hounds yourself at  www.leandrasilver.com/hiddenHounds %23hiddenhounds`);
 					document.getElementById("twitter-button").setAttribute("href", tweet);
 				}	
 			}, 1200);

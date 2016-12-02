@@ -410,6 +410,8 @@ footer {
     font-family: sans-serif;
     line-height: 1.3rem;
     padding: 0; }
+  footer a {
+    color: #B19CD9; }
 
 .jsFastAnimation {
   animation: 3s blur ease-out forwards !important; }
